@@ -76,7 +76,7 @@ def irregular_predict():
         if 'Date' not in df.columns or 'Amount' not in df.columns:
             return jsonify({'error': 'Invalid data format', 'status': 'error'}), 400
         
-        df['Date'] = pd.to_datetime(df['Date'],format='%Y-%m-%d')
+        df['Date'] = pd.to_datetime(df['Date'])
         df.set_index('Date', inplace=True)
         
         # Resample and interpolate the data
