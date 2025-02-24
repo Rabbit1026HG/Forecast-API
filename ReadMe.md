@@ -59,6 +59,7 @@ Predicts future sales based on irregular interval sales data.
 #### Response
 
 - `predictionData`: Predicted sales data by day.
+- `weeklyData`: Average sales data by week including predictions.
 - `monthlyData`: Average sales data by month including predictions.
 - `yearlyData`: Average sales data by year including predictions.
 - `lastDate`: The last date in the provided data set.

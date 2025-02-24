@@ -109,8 +109,9 @@ def irregular_predict():
         # Prepare response data
         response_data = {
             'predictionData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df['Amount'].round(2).to_dict().items()},
-            'monthlyData': {k.strftime('%Y-%m-%d'): v for k, v in combined_data.resample('M').mean()['Amount'].round(2).to_dict().items()},
-            'yearlyData': {k.strftime('%Y-%m-%d'): v for k, v in combined_data.resample('Y').mean()['Amount'].round(2).to_dict().items()},
+            'weeklyData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df.resample('W').mean()['Amount'].round(2).to_dict().items()},
+            'monthlyData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df.resample('M').mean()['Amount'].round(2).to_dict().items()},
+            'yearlyData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df.resample('Y').mean()['Amount'].round(2).to_dict().items()},
             'lastDate': last_date.strftime('%Y-%m-%d'),
             'status': 'success'
         }
