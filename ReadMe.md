@@ -58,12 +58,23 @@ Predicts future sales based on irregular interval sales data.
 
 #### Response
 
-- `predictionData`: Predicted sales data by day.
-- `weeklyData`: Average sales data by week including predictions.
-- `monthlyData`: Average sales data by month including predictions.
-- `yearlyData`: Average sales data by year including predictions.
-- `lastDate`: The last date in the provided data set.
+- `actualSpend`: Last observed spend amount.
+- `forecastAmount`: Average of predicted amounts.
+- `forecasts`: Predicted amounts mapped to future dates.
 - `status`: Success or error status message.
+
+#### Example Response
+```json
+{
+    "actualSpend": 205.75,
+    "forecastAmount": 210.45,
+    "forecasts": {
+        "2023-02-01": 215.30,
+        ...
+    },
+    "status": "success"
+}
+```
 
 ## Installation
 
