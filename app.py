@@ -99,20 +99,16 @@ def irregular_predict():
         
         # Create predictions DataFrame
         last_date = daily_resampled_data.index[-1]
+        actualSpend = daily_resampled_data.iloc[-1]['Amount'].round(2)
         prediction_dates = pd.date_range(start=last_date + timedelta(days=1), periods=prediction_length)
         predictions_df = pd.DataFrame(predictions, index=prediction_dates, columns=daily_resampled_data.columns)
-        
-        # Combine historical and predicted data
-        combined_data = pd.concat([daily_resampled_data, predictions_df])
-        
+        forecastAmount = predictions_df['Amount'].mean().round(2)         
         
         # Prepare response data
         response_data = {
-            'predictionData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df['Amount'].round(2).to_dict().items()},
-            'weeklyData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df.resample('W').mean()['Amount'].round(2).to_dict().items()},
-            'monthlyData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df.resample('M').mean()['Amount'].round(2).to_dict().items()},
-            'yearlyData': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df.resample('Y').mean()['Amount'].round(2).to_dict().items()},
-            'lastDate': last_date.strftime('%Y-%m-%d'),
+            'actualSpend': actualSpend,
+            'forecastAmount': forecastAmount,
+            'forecasts': {k.strftime('%Y-%m-%d'): v for k, v in predictions_df['Amount'].round(2).to_dict().items()},            
             'status': 'success'
         }
         
